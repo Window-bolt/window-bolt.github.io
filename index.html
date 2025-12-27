@@ -4,15 +4,23 @@
 <meta charset="UTF-8">
 <title>Team Hydro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Leaflet Map CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
 <link rel="stylesheet" href="style.css">
+
+<!-- Leaflet Map JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="loginBox" class="card">
   <h2>🔐 Login</h2>
-  <input id="username" placeholder="Enter name">
-  <button onclick="login()">Login</button>
+  <input id="username" placeholder="Enter your name">
+  <button id="loginBtn">Login</button>
 </div>
 
 <!-- MAIN APP -->
@@ -20,27 +28,34 @@
 
 <h1>🌍 Team Hydro</h1>
 <p id="welcome"></p>
-<button onclick="logout()">Logout</button>
+<button id="logoutBtn">Logout</button>
 
 <!-- FIRE MAP -->
 <section class="card">
   <h2>🔥 Fire Map (Demo)</h2>
-  <div id="fireMap">🔥 🔥 🔥</div>
+  <div id="map"></div>
 </section>
 
 <!-- FIRE GAME -->
 <section class="card">
   <h2>🔥 Fire Extinguisher Game</h2>
-  <p id="fireInfo">Time: 10 | Extinguished: 0 / 5</p>
+  <p id="fireInfo">Time: 10 | Fires: 0 / 5</p>
   <div id="fireGame"></div>
-  <button onclick="startFireGame()">Start Fire Game</button>
+  <button id="startFire">Start Fire Game</button>
 </section>
 
-<!-- FLAPPY -->
+<!-- FLAPPY BIRD -->
 <section class="card">
   <h2>🐦 Flappy Fire Bird</h2>
-  <canvas id="flappyCanvas" width="320" height="400"></canvas>
-  <button onclick="startFlappy()">Start Game</button>
+  <canvas id="flappy" width="320" height="400"></canvas>
+  <button id="startFlappy">Start Flappy</button>
+</section>
+
+<!-- CREDITS -->
+<section class="card">
+  <h2>📜 Credits</h2>
+  <p>Created by Team Hydro</p>
+  <p>Maps: OpenStreetMap & Leaflet</p>
 </section>
 
 </div>
