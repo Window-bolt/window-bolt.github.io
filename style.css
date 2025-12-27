@@ -1,9 +1,9 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(#1e88e5,#0d47a1);
+  background: linear-gradient(#1976d2,#0d47a1);
   color: white;
   text-align: center;
-  margin: 0;
 }
 
 .card {
@@ -13,35 +13,21 @@ body {
   border-radius: 20px;
 }
 
-input {
+input, button {
   padding: 10px;
   border-radius: 10px;
   border: none;
-  width: 80%;
-}
-
-button {
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: none;
-  background: #ff5722;
-  color: white;
-  font-size: 16px;
   margin-top: 10px;
 }
 
-#fireMap {
-  height: 150px;
-  background: black;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
+button {
+  background: #ff5722;
+  color: white;
+  font-size: 16px;
 }
 
 #fireGame {
-  height: 250px;
+  height: 220px;
   background: #c8e6c9;
   border-radius: 15px;
   position: relative;
@@ -56,5 +42,10 @@ button {
 
 canvas {
   background: skyblue;
+  border-radius: 15px;
+}
+
+#map {
+  height: 250px;
   border-radius: 15px;
 }
