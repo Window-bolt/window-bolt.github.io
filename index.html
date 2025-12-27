@@ -1,95 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Team Hydro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Team Hydro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>TEAM HYDRO</h1>
-  <p>Protect Nature • Use Technology • Save Life</p>
-</header>
-
-<nav>
-  <a href="#about">About</a>
-  <a href="#auth">Login</a>
-  <a href="#map">Map</a>
-  <a href="#fires">Fires</a>
-  <a href="#games">Games</a>
-</nav>
-
-<section id="about" class="card">
-  <h2>About</h2>
-  <p>
-    Team Hydro is an environmental awareness and technology project.
-    We focus on water safety, fire awareness, and interactive learning.
-  </p>
-</section>
-
-<section id="auth" class="card">
-  <h2>Login / Sign Up</h2>
-
-  <input id="username" type="text" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-
-  <button onclick="signup()">Sign Up</button>
+<!-- LOGIN -->
+<div id="loginBox" class="card">
+  <h2>🔐 Login</h2>
+  <input id="username" placeholder="Enter name">
   <button onclick="login()">Login</button>
-  <button onclick="logout()">Logout</button>
+</div>
 
-  <p id="authStatus"></p>
-  <p id="loginNotice"></p>
+<!-- MAIN APP -->
+<div id="app" style="display:none">
+
+<h1>🌍 Team Hydro</h1>
+<p id="welcome"></p>
+<button onclick="logout()">Logout</button>
+
+<!-- FIRE MAP -->
+<section class="card">
+  <h2>🔥 Fire Map (Demo)</h2>
+  <div id="fireMap">🔥 🔥 🔥</div>
 </section>
 
-<section id="map" class="card protected">
-  <h2>Live Map</h2>
-
-  <button onclick="setNormalMap()">🌍 Normal</button>
-  <button onclick="setSatelliteMap()">🛰️ Satellite</button>
-
-  <iframe
-    id="mapFrame"
-    src="https://www.google.com/maps?q=India&z=5&output=embed"
-    loading="lazy">
-  </iframe>
-
-  <button onclick="showMyLocation()">📍 Show My Location</button>
-</section>
-
-<section id="fires" class="card protected">
-  <h2>🔥 Live Fire Detection</h2>
-
-  <iframe
-    src="https://firms.modaps.eosdis.nasa.gov/map/#t:adv;d:24hrs;@78.96,20.59,4z"
-    loading="lazy">
-  </iframe>
-
-  <button onclick="checkFireAlert()">🔥 Check Fire Near Me</button>
-  <p id="fireAlertStatus"></p>
-</section>
-
-<section id="games" class="card protected">
-  <h2>🎮 Games</h2>
-
-  <!-- Fire Game -->
-  <h3>🔥 Fire Extinguisher</h3>
-  <div id="gameArea"></div>
-  <p>Score: <span id="fireScore">0</span></p>
+<!-- FIRE GAME -->
+<section class="card">
+  <h2>🔥 Fire Extinguisher Game</h2>
+  <p id="fireInfo">Time: 10 | Extinguished: 0 / 5</p>
+  <div id="fireGame"></div>
   <button onclick="startFireGame()">Start Fire Game</button>
-
-  <!-- Flappy Game -->
-  <h3>🐦 Flappy Water Bird</h3>
-  <canvas id="flappyCanvas" width="320" height="400"></canvas>
-  <p>Tap / Click to Fly</p>
-  <button onclick="startFlappy()">Start Flappy Game</button>
 </section>
 
-<footer>
-  © 2025 Team Hydro
-</footer>
+<!-- FLAPPY -->
+<section class="card">
+  <h2>🐦 Flappy Fire Bird</h2>
+  <canvas id="flappyCanvas" width="320" height="400"></canvas>
+  <button onclick="startFlappy()">Start Game</button>
+</section>
+
+</div>
 
 <script src="script.js"></script>
 </body>
-                      </html>
+</html>
