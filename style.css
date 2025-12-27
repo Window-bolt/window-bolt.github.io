@@ -1,0 +1,112 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #04162f, #1e90ff);
+  color: white;
+  text-align: center;
+}
+
+header {
+  padding: 40px;
+  background: #04162f;
+}
+
+nav {
+  background: #062a52;
+  padding: 12px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 15px;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 6px;
+  border-radius: 10px;
+  border: none;
+  background: #1e90ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+iframe {
+  width: 100%;
+  max-width: 700px;
+  height: 350px;
+  border: none;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.protected {
+  display: none;
+}
+
+/* Fire click game */
+#gameArea {
+  width: 300px;
+  height: 250px;
+  background: #0b3d2e;
+  margin: auto;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fire {
+  position: absolute;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Flappy */
+canvas {
+  background: linear-gradient(#87ceeb, #1e90ff);
+  border-radius: 12px;
+  display: block;
+  margin: auto;
+}
+
+footer {
+  background: #04162f;
+  padding: 15px;
+  }
