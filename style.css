@@ -1,112 +1,60 @@
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #04162f, #1e90ff);
+  background: linear-gradient(#1e88e5,#0d47a1);
   color: white;
   text-align: center;
-}
-
-header {
-  padding: 40px;
-  background: #04162f;
-}
-
-nav {
-  background: #062a52;
-  padding: 12px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: bold;
+  margin: 0;
 }
 
 .card {
   background: rgba(255,255,255,0.15);
   margin: 20px;
   padding: 20px;
-  border-radius: 15px;
-
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  border-radius: 20px;
 }
 
 input {
   padding: 10px;
-  margin: 5px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
+  width: 80%;
 }
 
 button {
   padding: 10px 15px;
-  margin: 6px;
   border-radius: 10px;
   border: none;
-  background: #1e90ff;
+  background: #ff5722;
   color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-iframe {
-  width: 100%;
-  max-width: 700px;
-  height: 350px;
-  border: none;
-  border-radius: 12px;
+  font-size: 16px;
   margin-top: 10px;
 }
 
-.protected {
-  display: none;
+#fireMap {
+  height: 150px;
+  background: black;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
 }
 
-/* Fire click game */
-#gameArea {
-  width: 300px;
+#fireGame {
   height: 250px;
-  background: #0b3d2e;
-  margin: auto;
-  border-radius: 12px;
+  background: #c8e6c9;
+  border-radius: 15px;
   position: relative;
   overflow: hidden;
 }
 
 .fire {
   position: absolute;
-  font-size: 28px;
+  font-size: 30px;
   cursor: pointer;
 }
 
-/* Flappy */
 canvas {
-  background: linear-gradient(#87ceeb, #1e90ff);
-  border-radius: 12px;
-  display: block;
-  margin: auto;
+  background: skyblue;
+  border-radius: 15px;
 }
-
-footer {
-  background: #04162f;
-  padding: 15px;
-  }
