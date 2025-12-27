@@ -4,20 +4,16 @@
 <meta charset="UTF-8">
 <title>Hydro X</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 </head>
 <body>
 
 <!-- LOGIN SCREEN -->
 <div id="loginScreen">
-  <div class="loginCard">
+  <div class="loginBox">
     <h1>HYDRO <span>X</span></h1>
-    <p>Fire Detection & Control System</p>
-    <input id="username" placeholder="Enter your name">
+    <p>Fire Detection & Control</p>
+    <input type="text" id="username" placeholder="Enter your name">
     <button onclick="login()">LOGIN</button>
   </div>
 </div>
@@ -30,38 +26,28 @@
   <button onclick="logout()">Logout</button>
 </header>
 
-<section class="grid">
+<div class="container">
 
-<!-- MAP -->
 <div class="card">
-  <h3>🔥 Fire Map (Demo)</h3>
-  <div id="map"></div>
+  <h3>🔥 Fire Game</h3>
+  <p id="fireText">Time: 10 | Fires: 0 / 5</p>
+  <div id="fireArea"></div>
+  <button onclick="startFireGame()">Start Game</button>
 </div>
 
-<!-- FIRE GAME -->
-<div class="card">
-  <h3>🔥 Fire Extinguisher Game</h3>
-  <p id="fireInfo">Time: 10 | Fires: 0 / 5</p>
-  <div id="fireGame"></div>
-  <button onclick="startFireGame()">Start</button>
-</div>
-
-<!-- FLAPPY -->
 <div class="card">
   <h3>🐦 Flappy Fire Bird</h3>
   <canvas id="flappy" width="300" height="350"></canvas>
   <button onclick="startFlappy()">Play</button>
 </div>
 
-<!-- CREDITS -->
 <div class="card">
   <h3>📜 Credits</h3>
   <p>Project: Hydro X</p>
-  <p>Created by Team Hydro</p>
-  <p>Maps powered by OpenStreetMap</p>
+  <p>Developed by Team Hydro</p>
 </div>
 
-</section>
+</div>
 </div>
 
 <script src="script.js"></script>
