@@ -1,121 +1,116 @@
-/* ===== LOGIN SYSTEM ===== */
-function checkLogin() {
-  const loggedIn = localStorage.getItem("hydroLoggedIn");
-  const user = localStorage.getItem("hydroUser");
-
-  document.querySelectorAll(".protected").forEach(sec => {
-    sec.style.display = loggedIn === "true" ? "block" : "none";
-  });
-
-  document.getElementById("loginNotice").innerText =
-    loggedIn === "true" ? "Logged in as " + user + " ✅" : "Login required 🔒";
-}
-
-function signup() {
-  const u = username.value;
-  const p = password.value;
-  if (!u || !p) return alert("Fill all fields");
-  localStorage.setItem("hydroUser", u);
-  localStorage.setItem("hydroPass", p);
-  authStatus.innerText = "Sign up successful!";
-}
+/* ---------- LOGIN ---------- */
+if (localStorage.getItem("user")) showApp();
 
 function login() {
-  if (username.value === localStorage.getItem("hydroUser") &&
-      password.value === localStorage.getItem("hydroPass")) {
-    localStorage.setItem("hydroLoggedIn", "true");
-    authStatus.innerText = "Welcome 👋";
-    checkLogin();
-  } else authStatus.innerText = "Wrong details";
+  const name = document.getElementById("username").value;
+  if (!name) return alert("Enter name");
+  localStorage.setItem("user", name);
+  showApp();
+}
+
+function showApp() {
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("app").style.display = "block";
+  document.getElementById("welcome").innerText =
+    "Welcome, " + localStorage.getItem("user");
 }
 
 function logout() {
-  localStorage.setItem("hydroLoggedIn", "false");
-  checkLogin();
+  localStorage.removeItem("user");
+  location.reload();
 }
 
-/* ===== MAP ===== */
-function setNormalMap() {
-  mapFrame.src = "https://www.google.com/maps?q=India&z=5&output=embed";
-}
-function setSatelliteMap() {
-  mapFrame.src = "https://www.google.com/maps?t=k&q=India&z=5&output=embed";
-}
-function showMyLocation() {
-  navigator.geolocation.getCurrentPosition(pos => {
-    mapFrame.src =
-      `https://www.google.com/maps?t=k&q=${pos.coords.latitude},${pos.coords.longitude}&z=15&output=embed`;
-  });
-}
-
-/* ===== FIRE ALERT ===== */
-function checkFireAlert() {
-  alert("Check red fire spots on the fire map near your location.");
-}
-
-/* ===== FIRE CLICK GAME ===== */
-let fireScore = 0, fireInterval;
+/* ---------- FIRE GAME ---------- */
+let fireCount = 0, timeLeft = 10, fireTimer, spawnTimer;
 
 function startFireGame() {
-  fireScore = 0;
-  fireScoreSpan = document.getElementById("fireScore");
-  fireScoreSpan.innerText = 0;
-  gameArea.innerHTML = "";
+  fireCount = 0;
+  timeLeft = 10;
+  document.getElementById("fireGame").innerHTML = "";
+  updateFireInfo();
 
-  fireInterval = setInterval(() => {
-    const f = document.createElement("div");
-    f.className = "fire";
-    f.innerText = "🔥";
-    f.style.left = Math.random()*260+"px";
-    f.style.top = Math.random()*210+"px";
-    f.onclick = () => {
-      f.remove();
-      fireScore++;
-      fireScoreSpan.innerText = fireScore;
-    };
-    gameArea.appendChild(f);
-    setTimeout(()=>f.remove(),3000);
-  },800);
+  fireTimer = setInterval(() => {
+    timeLeft--;
+    updateFireInfo();
+    if (timeLeft <= 0) endFireGame();
+  }, 1000);
 
-  setTimeout(()=>clearInterval(fireInterval),20000);
+  spawnTimer = setInterval(spawnFire, 700);
 }
 
-/* ===== FLAPPY GAME ===== */
-let ctx, birdY, birdV, pipes, loop;
+function spawnFire() {
+  const game = document.getElementById("fireGame");
+  const fire = document.createElement("div");
+  fire.className = "fire";
+  fire.innerHTML = "🔥";
+  fire.style.left = Math.random()*90+"%";
+  fire.style.top = Math.random()*80+"%";
+
+  fire.onclick = () => {
+    fire.remove();
+    fireCount++;
+    updateFireInfo();
+  };
+
+  game.appendChild(fire);
+}
+
+function updateFireInfo() {
+  document.getElementById("fireInfo").innerText =
+    `Time: ${timeLeft} | Extinguished: ${fireCount} / 5`;
+}
+
+function endFireGame() {
+  clearInterval(fireTimer);
+  clearInterval(spawnTimer);
+  alert(fireCount >= 5 ? "✅ You Win!" : "❌ Game Over!");
+}
+
+/* ---------- FLAPPY GAME ---------- */
+const canvas = document.getElementById("flappyCanvas");
+const ctx = canvas.getContext("2d");
+let bird, pipes, gravity, loop;
 
 function startFlappy() {
-  ctx = flappyCanvas.getContext("2d");
-  birdY = 200;
-  birdV = 0;
-  pipes = [{x:320}];
-
+  bird = { x: 50, y: 200, v: 0 };
+  pipes = [];
+  gravity = 0.6;
   clearInterval(loop);
-  loop = setInterval(updateFlappy,30);
-
-  document.onclick = ()=>birdV = -6;
+  loop = setInterval(updateFlappy, 30);
+  document.onclick = () => bird.v = -8;
 }
 
 function updateFlappy() {
-  ctx.clearRect(0,0,320,400);
-  birdV += 0.4;
-  birdY += birdV;
-  ctx.font="28px Arial";
-  ctx.fillText("💧🐦",50,birdY);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  bird.v += gravity;
+  bird.y += bird.v;
+  ctx.font = "30px Arial";
+  ctx.fillText("🐦", bird.x, bird.y);
 
-  pipes.forEach(p=>{
-    p.x -= 2;
-    ctx.fillText("🔥",p.x,0);
-    ctx.fillText("🔥",p.x,360);
-    if(p.x<0){p.x=320;}
-    if(p.x<80 && p.x>40 && (birdY<40 || birdY>360)) endFlappy();
+  if (!pipes.length || pipes[pipes.length-1].x < 200) {
+    pipes.push({
+      x: canvas.width,
+      gap: 120,
+      top: Math.random()*150+20
+    });
+  }
+
+  pipes.forEach(p => {
+    p.x -= 3;
+    ctx.fillStyle = "green";
+    ctx.fillRect(p.x,0,40,p.top);
+    ctx.fillRect(p.x,p.top+p.gap,40,canvas.height);
+    ctx.fillText("🔥",p.x+5,p.top+p.gap/2);
+
+    if (bird.x>p.x && bird.x<p.x+40 &&
+       (bird.y<p.top || bird.y>p.top+p.gap))
+      gameOver();
   });
 
-  if(birdY<0||birdY>400) endFlappy();
+  if (bird.y>canvas.height || bird.y<0) gameOver();
 }
 
-function endFlappy() {
+function gameOver() {
   clearInterval(loop);
-  alert("Game Over!");
+  alert("❌ Game Over!");
 }
-
-window.onload = checkLogin;
