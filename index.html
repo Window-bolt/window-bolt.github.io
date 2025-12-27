@@ -2,62 +2,66 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Team Hydro</title>
+<title>Hydro X</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Leaflet Map CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
 <link rel="stylesheet" href="style.css">
-
-<!-- Leaflet Map JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginBox" class="card">
-  <h2>🔐 Login</h2>
-  <input id="username" placeholder="Enter your name">
-  <button id="loginBtn">Login</button>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="loginCard">
+    <h1>HYDRO <span>X</span></h1>
+    <p>Fire Detection & Control System</p>
+    <input id="username" placeholder="Enter your name">
+    <button onclick="login()">LOGIN</button>
+  </div>
 </div>
 
-<!-- MAIN APP -->
-<div id="app" style="display:none">
+<!-- DASHBOARD -->
+<div id="dashboard">
 
-<h1>🌍 Team Hydro</h1>
-<p id="welcome"></p>
-<button id="logoutBtn">Logout</button>
+<header>
+  <h2>TEAM HYDRO</h2>
+  <button onclick="logout()">Logout</button>
+</header>
 
-<!-- FIRE MAP -->
-<section class="card">
-  <h2>🔥 Fire Map (Demo)</h2>
+<section class="grid">
+
+<!-- MAP -->
+<div class="card">
+  <h3>🔥 Fire Map (Demo)</h3>
   <div id="map"></div>
-</section>
+</div>
 
 <!-- FIRE GAME -->
-<section class="card">
-  <h2>🔥 Fire Extinguisher Game</h2>
+<div class="card">
+  <h3>🔥 Fire Extinguisher Game</h3>
   <p id="fireInfo">Time: 10 | Fires: 0 / 5</p>
   <div id="fireGame"></div>
-  <button id="startFire">Start Fire Game</button>
-</section>
+  <button onclick="startFireGame()">Start</button>
+</div>
 
-<!-- FLAPPY BIRD -->
-<section class="card">
-  <h2>🐦 Flappy Fire Bird</h2>
-  <canvas id="flappy" width="320" height="400"></canvas>
-  <button id="startFlappy">Start Flappy</button>
-</section>
+<!-- FLAPPY -->
+<div class="card">
+  <h3>🐦 Flappy Fire Bird</h3>
+  <canvas id="flappy" width="300" height="350"></canvas>
+  <button onclick="startFlappy()">Play</button>
+</div>
 
 <!-- CREDITS -->
-<section class="card">
-  <h2>📜 Credits</h2>
+<div class="card">
+  <h3>📜 Credits</h3>
+  <p>Project: Hydro X</p>
   <p>Created by Team Hydro</p>
-  <p>Maps: OpenStreetMap & Leaflet</p>
-</section>
+  <p>Maps powered by OpenStreetMap</p>
+</div>
 
+</section>
 </div>
 
 <script src="script.js"></script>
