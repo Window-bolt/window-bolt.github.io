@@ -2,31 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hydro X</title>
+<title>TEAM HYDRO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Leaflet Map -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 </head>
+
 <body>
 
-<!-- AUTH -->
-<div id="authScreen">
-  <div class="authBox">
-    <h1>HYDRO <span>X</span></h1>
-    <input id="authUser" placeholder="Username">
-    <input id="authPass" type="password" placeholder="Password">
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="loginBox">
+    <h1>TEAM <span>HYDRO</span></h1>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
     <button onclick="login()">Login</button>
-    <button class="alt" onclick="signup()">Sign Up</button>
+    <button class="secondary" onclick="signup()">Sign Up</button>
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboard">
+<!-- APP -->
+<div id="app">
 <header>
   <h2>TEAM HYDRO</h2>
   <button onclick="logout()">Logout</button>
@@ -34,28 +33,24 @@
 
 <div class="grid">
 
-<!-- FIRE MAP -->
 <div class="card">
-  <h3>🗺️ Fire Map</h3>
+  <h3>🔥 Fire Map</h3>
   <div id="map"></div>
 </div>
 
-<!-- FIRE GAME -->
 <div class="card">
   <h3>🔥 Fire Game</h3>
-  <p id="fireText">Time: 10 | Fires: 0 / 5</p>
+  <p id="fireStatus">Time: 10 | Fires: 0 / 5</p>
   <div id="fireArea"></div>
   <button onclick="startFireGame()">Start</button>
 </div>
 
-<!-- FLAPPY -->
 <div class="card">
   <h3>💧 Flappy Fire</h3>
-  <canvas id="flappy" width="300" height="350"></canvas>
+  <canvas id="game" width="300" height="360"></canvas>
   <button onclick="startFlappy()">Play</button>
 </div>
 
-<!-- CREDITS -->
 <div class="card">
   <h3>📜 Credits</h3>
   <p>Hydro X Project</p>
