@@ -1,3 +1,4 @@
+/* LOGIN */
 function signup(){
   if(!user.value||!pass.value) return alert("Fill all fields");
   localStorage.setItem(user.value,pass.value);
@@ -14,28 +15,43 @@ function login(){
 
 function logout(){location.reload()}
 
-/* MAP */
-let map;
+/* REAL FIRE MAP */
+let map, fireLayer, fireVisible=true;
+
 function initMap(){
   if(map) return;
-  map=L.map("map").setView([20.6,78.9],5);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
-  [[28,77],[19,72],[13,80],[22,88]].forEach(p=>{
-    L.marker(p).addTo(map).bindPopup("🔥 Fire detected");
-  });
+  map = L.map("map").setView([20,0],2);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+    maxZoom:18
+  }).addTo(map);
+
+  fireLayer = L.tileLayer(
+    "https://firms.modaps.eosdis.nasa.gov/mapserver/wms/fires/MapServer/tile/{z}/{y}/{x}",
+    {opacity:0.7}
+  ).addTo(map);
+}
+
+function toggleFires(){
+  fireVisible=!fireVisible;
+  fireLayer.setOpacity(fireVisible?0.7:0);
 }
 
 /* FIRE GAME */
-let timeLeft,fireCount,spawn,timer;
+let fireScore=0, fireBest=localStorage.fireBest||0;
+let fireTime, spawn, timer;
+
 function startFireGame(){
-  clearInterval(spawn);clearInterval(timer);
+  fireScore=0;
+  fireTime=10;
   fireArea.innerHTML="";
-  timeLeft=10;fireCount=0;
+  fireResult.innerText="";
   updateFire();
 
   timer=setInterval(()=>{
-    timeLeft--;updateFire();
-    if(timeLeft<=0) endFire();
+    fireTime--;
+    updateFire();
+    if(fireTime<=0) endFire();
   },1000);
 
   spawn=setInterval(()=>{
@@ -44,61 +60,86 @@ function startFireGame(){
     f.innerText="🔥";
     f.style.left=Math.random()*85+"%";
     f.style.top=Math.random()*75+"%";
-    f.onclick=()=>{f.remove();fireCount++;updateFire()};
+    f.onclick=()=>{
+      fireScore++;
+      f.remove();
+      updateFire();
+    };
     fireArea.appendChild(f);
   },700);
 }
 
 function updateFire(){
-  fireStatus.innerText=`Time: ${timeLeft} | Fires: ${fireCount} / 5`;
+  fireInfo.innerText=`Score: ${fireScore} | Best: ${fireBest} | Time: ${fireTime}`;
 }
 
 function endFire(){
-  clearInterval(spawn);clearInterval(timer);
-  alert(fireCount>=5?"YOU WIN":"GAME OVER");
+  clearInterval(spawn);
+  clearInterval(timer);
+  if(fireScore>fireBest){
+    fireBest=fireScore;
+    localStorage.fireBest=fireBest;
+  }
+  fireResult.innerText = fireScore>=5 ? "✅ YOU WIN!" : "❌ GAME OVER";
+  updateFire();
 }
 
-/* FLAPPY */
-const c=game,ctx=c.getContext("2d");
-let bird,pipes,loop;
+/* FLAPPY BIRD (NO FIRE EMOJI) */
+const c=game, ctx=c.getContext("2d");
+let bird, pipes, flappyLoop;
+let flappyScore=0, flappyBest=localStorage.flappyBest||0;
 
 function startFlappy(){
   bird={x:50,y:180,v:0};
   pipes=[];
-  clearInterval(loop);
-  loop=setInterval(updateFlappy,30);
+  flappyScore=0;
+  updateFlappyInfo();
+  clearInterval(flappyLoop);
+
   document.onclick=()=>bird.v=-7;
+  flappyLoop=setInterval(updateFlappy,30);
 }
 
 function updateFlappy(){
   ctx.clearRect(0,0,300,360);
+
   bird.v+=0.5;
   bird.y+=bird.v;
-
   ctx.font="26px Arial";
   ctx.fillText("💧",bird.x,bird.y);
 
   if(!pipes.length||pipes[pipes.length-1].x<160)
-    pipes.push({x:300,top:Math.random()*100+40,gap:140});
+    pipes.push({x:300,top:Math.random()*100+40,gap:140,passed:false});
 
   pipes.forEach(p=>{
     p.x-=3;
-
-    ctx.fillStyle="#c62828"; // RED POSTS
+    ctx.fillStyle="#c62828";
     ctx.fillRect(p.x,0,40,p.top);
     ctx.fillRect(p.x,p.top+p.gap,40,360);
 
-    ctx.font="20px Arial";
-    ctx.fillText("🔥",p.x+8,p.top+p.gap/2+10);
+    if(!p.passed && p.x+40<bird.x){
+      flappyScore++;
+      p.passed=true;
+      updateFlappyInfo();
+    }
 
-    if(bird.x>p.x&&bird.x<p.x+40 &&
-      (bird.y<p.top||bird.y>p.top+p.gap)) gameOver();
+    if(bird.x>p.x && bird.x<p.x+40 &&
+      (bird.y<p.top||bird.y>p.top+p.gap)) endFlappy();
   });
 
-  if(bird.y<0||bird.y>360) gameOver();
+  if(bird.y<0||bird.y>360) endFlappy();
 }
 
-function gameOver(){
-  clearInterval(loop);
+function updateFlappyInfo(){
+  flappyInfo.innerText=`Score: ${flappyScore} | Best: ${flappyBest}`;
+}
+
+function endFlappy(){
+  clearInterval(flappyLoop);
+  if(flappyScore>flappyBest){
+    flappyBest=flappyScore;
+    localStorage.flappyBest=flappyBest;
+  }
+  updateFlappyInfo();
   alert("Game Over");
 }
