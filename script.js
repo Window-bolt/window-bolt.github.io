@@ -26,10 +26,13 @@ function initMap(){
     maxZoom:18
   }).addTo(map);
 
-  fireLayer = L.tileLayer(
-    "https://firms.modaps.eosdis.nasa.gov/mapserver/wms/fires/MapServer/tile/{z}/{y}/{x}",
-    {opacity:0.7}
-  ).addTo(map);
+fireLayer = L.tileLayer(
+  "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_Thermal_Anomalies_24h/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.png",
+  {
+    opacity: 0.8,
+    attribution: "NASA FIRMS"
+  }
+).addTo(map);
 }
 
 function toggleFires(){
