@@ -1,7 +1,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI}
 
 body{
-  background:radial-gradient(circle,#0a1a44,#04102e);
+  background:radial-gradient(circle,#04163d,#020b2d);
   color:#e3f2fd;
 }
 
@@ -17,16 +17,11 @@ body{
 
 .loginBox{
   width:320px;
-  background:rgba(255,255,255,.1);
+  background:rgba(255,255,255,.12);
   padding:35px;
   border-radius:22px;
   box-shadow:0 0 40px rgba(0,229,255,.8);
   text-align:center;
-}
-
-.loginBox h1{
-  margin-bottom:20px;
-  color:#bbdefb;
 }
 
 .loginBox span{color:#00e5ff}
@@ -42,9 +37,9 @@ body{
 .loginBox button{
   width:100%;
   padding:12px;
+  margin-top:10px;
   border:none;
   border-radius:10px;
-  margin-top:10px;
   background:linear-gradient(45deg,#1e88e5,#00e5ff);
   font-weight:bold;
 }
@@ -84,7 +79,10 @@ header button{
   box-shadow:0 0 15px rgba(0,229,255,.4);
 }
 
-#map{height:220px;border-radius:15px}
+#map{
+  height:230px;
+  border-radius:15px;
+}
 
 #fireArea{
   height:180px;
