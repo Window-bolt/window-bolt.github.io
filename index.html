@@ -12,6 +12,7 @@
 
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="loginBox">
     <h1>TEAM <span>HYDRO</span></h1>
@@ -22,6 +23,7 @@
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
 <header>
   <h2>TEAM HYDRO</h2>
@@ -31,26 +33,32 @@
 <div class="grid">
 
 <div class="card">
-  <h3>🔥 Fire Map</h3>
+  <h3>🔥 Live Fire Map</h3>
   <div id="map"></div>
+  <button onclick="toggleFires()">Toggle Fire Layer</button>
 </div>
 
 <div class="card">
   <h3>🔥 Fire Game</h3>
-  <p id="fireStatus">Time: 10 | Fires: 0 / 5</p>
+  <p id="fireInfo">Score: 0 | Best: 0 | Time: 10</p>
   <div id="fireArea"></div>
   <button onclick="startFireGame()">Start</button>
+  <p id="fireResult"></p>
 </div>
 
 <div class="card">
-  <h3>💧 Flappy Fire</h3>
+  <h3>💧 Flappy Bird</h3>
+  <p id="flappyInfo">Score: 0 | Best: 0</p>
   <canvas id="game" width="300" height="360"></canvas>
   <button onclick="startFlappy()">Play</button>
 </div>
 
 <div class="card">
   <h3>📜 Credits</h3>
-  <p>Team Hydro</p>
+  <p>Project Hydro X</p>
+  <p>Designed & Developed by Team Hydro 
+  Gangan R G
+</p>
 </div>
 
 </div>
